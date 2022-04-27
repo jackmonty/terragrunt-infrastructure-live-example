@@ -36,6 +36,10 @@ EOF
 
 # Configure Terragrunt to automatically store tfstate files in an S3 bucket
 remote_state {
+  generate = {
+    path      = "backend.tf"
+    if_exists = "overwrite_terragrunt"
+  }
   backend = "s3"
   config = {
     encrypt        = true
@@ -43,10 +47,6 @@ remote_state {
     key            = "${path_relative_to_include()}/terraform.tfstate"
     region         = local.aws_region
     dynamodb_table = "terraform-locks"
-  }
-  generate = {
-    path      = "backend.tf"
-    if_exists = "overwrite_terragrunt"
   }
 }
 
