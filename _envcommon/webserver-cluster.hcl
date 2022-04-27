@@ -17,13 +17,9 @@ terraform {
 # Locals are named constants that are reusable within the configuration.
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
-  # Automatically load account-level variables
+  # Automatically load account, environment and enablement variables
   account_vars = read_terragrunt_config(find_in_parent_folders("account.hcl"))
-
-  # Automatically load environment-level variables
   environment_vars = read_terragrunt_config(find_in_parent_folders("env.hcl"))
-
-  # Automatically load enabled variables
   enabled_vars = read_terragrunt_config(find_in_parent_folders("enabled.hcl"))
 
   # Extract out common variables for reuse
