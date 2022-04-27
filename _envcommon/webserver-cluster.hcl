@@ -17,17 +17,22 @@ terraform {
 # Locals are named constants that are reusable within the configuration.
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
+  # Automatically load account-level variables
+  account_vars = read_terragrunt_config(find_in_parent_folders("account.hcl"))
+
   # Automatically load environment-level variables
   environment_vars = read_terragrunt_config(find_in_parent_folders("env.hcl"))
 
+  # Automatically load enabled variables
+  enabled_vars = read_terragrunt_config(find_in_parent_folders("enabled.hcl"))
+
   # Extract out common variables for reuse
   env = local.environment_vars.locals.environment
-
-  enabled_vars = read_terragrunt_config(find_in_parent_folders("enabled.hcl"))
-  enabled = local.enabled_vars.locals.web-enabled
+  account-enabled = local.account_vars.locals.account_enabled
+  web-enabled = local.enabled_vars.locals.web_enabled
 
   # Expose the base source URL so different versions of the module can be deployed in different environments.
-  base_source_url = local.enabled ? "git::git@github-jackmonty:jackmonty/terragrunt-infrastructure-modules-example.git//asg-elb-service" : null
+  base_source_url = local.account-enabled && local.web-enabled ? "git::git@github-jackmonty:jackmonty/terragrunt-infrastructure-modules-example.git//asg-elb-service" : null
 }
 
 # ---------------------------------------------------------------------------------------------------------------------

@@ -26,7 +26,7 @@ locals {
 
   # Automatically load enablement variables
   enabled_vars = read_terragrunt_config(find_in_parent_folders("enabled.hcl"))
-  enabled = local.enabled_vars.locals.mysql-enabled
+  enabled = local.enabled_vars.locals.mysql_enabled
 
   # Expose the base source URL so different versions of the module can be deployed in different environments. This will
   # be used to construct the terraform block in the child terragrunt configurations.
