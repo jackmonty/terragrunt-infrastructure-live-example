@@ -24,9 +24,13 @@ locals {
   # Extract out common variables for reuse
   env = local.environment_vars.locals.environment
 
+  # Automatically load enablement variables
+  enabled_vars = read_terragrunt_config(find_in_parent_folders("enabled.hcl"))
+  enabled = local.enabled_vars.locals.mysql-enabled
+
   # Expose the base source URL so different versions of the module can be deployed in different environments. This will
   # be used to construct the terraform block in the child terragrunt configurations.
-  base_source_url = "git::git@github-jackmonty:jackmonty/terragrunt-infrastructure-modules-example.git//mysql"
+  base_source_url = local.enabled ? "git::git@github-jackmonty:jackmonty/terragrunt-infrastructure-modules-example.git//mysql" : null
 }
 
 
