@@ -1,4 +1,4 @@
 locals {
-  mysql-enabled = true
-  web-enabled = true
+  mysql-enabled = false
+  web-enabled = false
 }
