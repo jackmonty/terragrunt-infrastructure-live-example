@@ -28,7 +28,7 @@ locals {
   web-enabled = local.enabled_vars.locals.web_enabled
 
   # Expose the base source URL so different versions of the module can be deployed in different environments.
-  base_source_url = local.account-enabled && local.web-enabled ? "git::git@github-jackmonty:jackmonty/terragrunt-infrastructure-modules-example.git//asg-elb-service" : null
+  base_source_url = local.account-enabled && local.web-enabled ? "git::git@github-jackmonty:jackmonty/terragrunt-infrastructure-modules-example.git//asg-elb-service" : find_in_parent_folders("empty.tf")
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
