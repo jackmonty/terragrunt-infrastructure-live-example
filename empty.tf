@@ -1,4 +1,6 @@
 /*
+ * REQUIRED: This file allows the destruction of code as intended.
+ * 
  * This file is simply an empty file that will be used to destroy exiting infrastructure.
  * Without this file, the ternary code within the modules inside `_envcommon`, using `null`,
  * does not operate as intended.
