@@ -2,5 +2,5 @@
 # configure the remote state bucket and pass forward to the child modules as inputs.
 locals {
   aws_region = "us-east-2"
-  enabled    = false
+  enabled    = true
 }
