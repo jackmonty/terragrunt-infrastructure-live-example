@@ -4,7 +4,8 @@ projects:
   dir: non-prod/us-east-2
   workflow: terragrunt
   autoplan:
-    enabled: false
+    when_modified: ["**/*.hcl", "**/*.tf"]
+    enabled: true
 workflows:
   terragrunt:
     plan:
