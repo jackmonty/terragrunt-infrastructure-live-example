@@ -1,7 +1,10 @@
 version: 3
 projects:
-- dir: non-prod/us-east-2
+- name: terragrunt-example
+  dir: non-prod/us-east-2
   workflow: terragrunt
+  autoplan:
+    enabled: false
 workflows:
   terragrunt:
     plan:
