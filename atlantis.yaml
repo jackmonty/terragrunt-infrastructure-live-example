@@ -4,13 +4,13 @@ projects:
   dir: non-prod/us-east-2
   workflow: terragrunt
   autoplan:
-    when_modified: ["**/*.hcl", "**/*.tf"]
+    when_modified: ["**/*.hcl"]
     enabled: true
 workflows:
   terragrunt:
     plan:
       steps:
-      - run: terragrunt run-all plan -out $PLANFILE
+      - run: terragrunt run-all plan
     apply:
       steps:
-      - run: terragrunt run-all apply -lock=false $PLANFILE --terragrunt-non-interactive
+      - run: terragrunt run-all apply --terragrunt-non-interactive
