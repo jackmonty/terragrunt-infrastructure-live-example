@@ -18,17 +18,16 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 locals {
   # Automatically load account, environment and enablement variables
-  account_vars = read_terragrunt_config(find_in_parent_folders("account.hcl"))
   environment_vars = read_terragrunt_config(find_in_parent_folders("env.hcl"))
   enabled_vars = read_terragrunt_config(find_in_parent_folders("enabled.hcl"))
   
   # Extract out common variables for reuse
   env = local.environment_vars.locals.environment
-  account-enabled = local.account_vars.locals.account_enabled
+  env-enabled = local.environment_vars.locals.enabled
   mysql-enabled = local.enabled_vars.locals.mysql_enabled
 
   # Expose the base source URL so different versions of the module can be deployed in different environments. 
-  base_source_url = local.account-enabled && local.mysql-enabled ? "git::git@github-jackmonty:jackmonty/terragrunt-infrastructure-modules-example.git//mysql" : find_in_parent_folders("empty.tf")
+  base_source_url = local.env-enabled && local.mysql-enabled ? "git::git@github-jackmonty:jackmonty/terragrunt-infrastructure-modules-example.git//mysql" : find_in_parent_folders("empty.tf")
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
