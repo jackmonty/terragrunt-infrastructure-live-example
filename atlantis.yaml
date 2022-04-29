@@ -10,7 +10,7 @@ workflows:
   terragrunt:
     plan:
       steps:
-      - run: terragrunt run-all plan
+      - run: terragrunt run-all plan -out $PLANFILE
     apply:
       steps:
-      - run: terragrunt run-all apply --terragrunt-non-interactive
+      - run: terragrunt run-all apply $PLANFILE --terragrunt-non-interactive
