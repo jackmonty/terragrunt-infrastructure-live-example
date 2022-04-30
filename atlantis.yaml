@@ -6,6 +6,12 @@ projects:
   autoplan:
     when_modified: ["**/*.hcl"]
     enabled: true
+- name: non-prod_us-east-2_qa_web 
+  dir: non-prod/us-east-2/qa/webserver-cluster
+  workflow: terragrunt
+  autoplan:
+    when_modified: ["../**/*.hcl"]
+    enabled: true
 workflows:
   terragrunt-run-all:
     plan:
@@ -14,3 +20,10 @@ workflows:
     apply:
       steps:
       - run: "terragrunt run-all apply plan.out --terragrunt-non-interactive"
+  terragrunt:
+    plan:
+      steps:
+      - run: "terragrunt plan -out plan.out"
+    apply:
+      steps:
+      - run: "terragrunt apply plan.out --terragrunt-non-interactive"
