@@ -2,5 +2,5 @@
 # feed forward to the child modules.
 locals {
   environment = "stage"
-  enabled     = false
+  enabled     = true
 }
