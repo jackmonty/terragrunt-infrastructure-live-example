@@ -2,12 +2,12 @@ version: 3
 projects:
 - name: non-prod_us-east-2 
   dir: non-prod/us-east-2
-  workflow: terragrunt
+  workflow: terragrunt-run-all
   autoplan:
     when_modified: ["**/*.hcl"]
     enabled: true
 workflows:
-  terragrunt:
+  terragrunt-run-all:
     plan:
       steps:
       - run: "terragrunt run-all plan -out plan.out"
